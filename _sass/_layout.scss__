@@ -86,7 +86,9 @@
     }
 }
 
-
+.more {
+    @include appearance(none);
+}
 
 /**
  * Site footer
