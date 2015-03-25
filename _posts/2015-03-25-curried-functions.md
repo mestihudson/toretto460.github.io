@@ -1,5 +1,5 @@
 ---
-title: Curried functions in two words
+title: Curried functions in short
 category : posts
 tags : [functional, curry]
 layout: post
