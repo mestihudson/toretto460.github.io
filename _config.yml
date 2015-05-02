@@ -1,12 +1,14 @@
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 highlighter: pygments
+
+kramdown:
+  input: GFM
 
 # Site settings
 title: "Toretto460's blog"
 description: > # this means to ignore newlines until "email:"
    Software Developer - OOS Enthusiast
-    
 email: toretto460@gmail.com
 #blog logo
 logo: "/assets/images/author.jpeg"
