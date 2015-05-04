@@ -2,7 +2,7 @@
 title: Test, Develop, Build, Stage with Docker
 layout: post
 category : posts
-image: /assets/images/6204375064_795f1cd7d1_o.jpg
+image: /assets/images/6204375064_795f1cd7d1_o_.jpg
 tags : [docker, jenkins, continuous Integration]
 ---
 
@@ -30,24 +30,24 @@ At Kataskopeo the joel score is 9/12, not so bad but we are working hard to grow
 
 The impact of CVS, automatic builds and continuous delivery on our workflow is a critical factor, as a software house we need to check continuously the software quality, we develop new feature every day and we fix bugs across different versions of the same product.
 
-During the last few years our products are growt very fast, today we use a lot of tool to develop client-server web applications. 
+During the last few years our products are grown very fast, today we use a lot of tool to develop client-server web applications. 
 The frontend team needs nodejs and grunt to run tasks automatically, compass and sass to build the stylesheets and bower to install client side libraries, on the other hand the backend team needs composer, php (with some exensions) and an Oracle database instance to test and code the APIs.
 
-We usually work in isolation so if i'm a frontend developer i don't need all the backend stuff, i develop unit tested components and when i want to see the result on the browser i use a stubbed API.<br>
-That's **great** because during the development we do not need the whole product dependencies, but during the build process the full stack is required.
-The build server needs to have installed php, composer, nodejs, npm , grunt, bower, compass, sass and all the tools necessary to build the product; that means if you have a build server you need all that stuff installed and if you have _n_ projects with _n_ php versions you need _n_ build servers. 
+We usually work in isolation so if I'm a frontend developer I don't need all the backend stuff, I develop unit tested components and when I want to see the result on the browser I use a stubbed API.<br>
+This is **great** because during the development we do not need the whole product dependencies, but during the build process the full stack is required.
+The build server needs to have installed Php, Composer, Node.js, NPM , Grunt, Bower, Compass, SASS and all the tools necessary to build the product; that means if you have a build server you need all that stuff installed and if you have _n_ projects with _n_ php versions you need _n_ build servers. 
 
-**Every single change on tools will force us to change the build server (ie: uninstall PHP55 and install PHP56) or maybe to set up a new one.**
+**Every single change to our toolchain forces us to update the build server (ie: uninstall PHP55 and install PHP56) or maybe to set up a new one.**
 
-To avoid that annoying problem we decided to rethink the internal CI infrastructure by adopt [Docker](http://docker.com). Docker is a platform that enables a lightweight virtualization through [Linux Containers](https://linuxcontainers.org); it allows you to spin up a new virtualized invironment in few seconds.
+To avoid that annoying problem we decided to rethink the internal CI infrastructure adopting [Docker](http://docker.com). Docker is a platform that enables a lightweight virtualization through [Linux Containers](https://linuxcontainers.org); it allows you to spin up a new virtualized invironment in few seconds.
 
-As a backend dev i need to test an API against Oracle database, that's simple, just run <br>
-`docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g` and you have a new fresh database instance.
+As a backend dev I need to test an API against Oracle database; this is very simple, I just need to run:<br>
+`docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g` and I have a new fresh database instance.
 
 ## Current workflow
 The current workflow adopted for all the team members is:
 
-* Develop
+* Development
 * Commit
 * Push
 
@@ -62,18 +62,18 @@ Jenkins is responsible to execute the following steps:
 * Compose the product package (**)
 * Update the staging environment with the new code (**)
 
-** if the Build was success
+** if the Build was successful
 
 As you can see the only think a developer should care about is to implement a new feature and push-it.<br>
 The whole **Build** -> **Test** -> **Deploy-To-Stage** process is automated.
 
 ## Limitations
-There are 2 main usage modes for jenkins; you can install a single instance and run all builds inside the same machine or you can connect master jenkins node with a bounch of slave instances.
+There are 2 main usage modes for jenkins; you can install a single instance and run all builds inside the same machine or you can connect the master jenkins node with a bounch of slave instances.
 
 
-IMHO both the single instance and master-slave solution have some limitations.
+IMHO both the single instance and the master-slave solution have some limitations.
 <br>
-The first one force you to install all you need inside the machine, so if you have projects with different requirements (for examample PHP54  and PHP55) you have to select just one of that versions.
+The first one forces you to install all you need inside the machine, so if you have projects with different requirements (for examample PHP54  and PHP55) you have to choose just one version.
 The latter allows you to build and test packages with different environments but it may be hard to maintain.<br>
 If you have a 10 slaves infrastructure every time a new PHP version is released you have to install the new package within a bounch of machines.
 
