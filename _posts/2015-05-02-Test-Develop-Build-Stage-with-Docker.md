@@ -139,6 +139,6 @@ We've created a bounch of base images `k-team\builder`, each one with a differen
 
 
 We are so happy to play with docker because we are able to develop and test products without caring about the dependencies,<br> just run `git clone` and `docker-compose up` to spawn the necessary containers.
-The same magic will run the Continous Integration and the Stage server.
+The same magic runs the Continous Integration and the Stage server.
 
 ![This is an happy dockerized developer](https://media.giphy.com/media/itDBteCsTFSVO/giphy.gif)
