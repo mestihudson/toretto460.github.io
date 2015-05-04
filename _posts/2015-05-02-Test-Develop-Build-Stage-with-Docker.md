@@ -37,7 +37,7 @@ We usually work in isolation so if I'm a frontend developer I don't need all the
 This is **great** because during the development we do not need the whole product dependencies, but during the build process the full stack is required.
 The build server needs to have installed Php, Composer, Node.js, NPM , Grunt, Bower, Compass, SASS and all the tools necessary to build the product; that means if you have a build server you need all that stuff installed and if you have _n_ projects with _n_ php versions you need _n_ build servers. 
 
-**Every single change to our toolchain forces us to update the build server (ie: uninstall PHP55 and install PHP56) or maybe to set up a new one.**
+**Every single change to our toolchain forces us to update the build server (ie: uninstall Php55 and install Php56) or maybe to set up a new one.**
 
 To avoid that annoying problem we decided to rethink the internal CI infrastructure adopting [Docker](http://docker.com). Docker is a platform that enables a lightweight virtualization through [Linux Containers](https://linuxcontainers.org); it allows you to spin up a new virtualized invironment in few seconds.
 
