@@ -101,7 +101,7 @@ The **build.sh** does the magic with docker, let's see how...<br>
 ```bash
 #!/bin/bash
 docker-compose build
-docker-compose run builder -u ant
+docker-compose run builder ant
 
 ## Copy the artifacts
 docker cp `docker-compose ps -q builder`:/application/artifacts .
