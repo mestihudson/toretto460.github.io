@@ -28,7 +28,7 @@ Have you ever heard the [Joel Test](http://www.joelonsoftware.com/articles/fog00
 As you can see the first three questions are about the source control (aka CVS), the one step build process and the daily builds.
 At Kataskopeo the joel score is 9/12, not so bad but we are working hard to grow up to the max level.
 
-The impact of CVS, automatic builds and continuous delivery on our workflow is a critical factor, as a software house we need to check continuously the software quality, we develop new feature every day and we fix bugs across different versions of the same product.
+The impact of CVS, automatic builds and continuous delivery on our workflow is a critical factor, as a software house we need to check continuously the software quality, we develop new features every day and we fix bugs across different versions of the same product.
 
 During the last few years our products are grown very fast, today we use a lot of tool to develop client-server web applications. 
 The frontend team needs nodejs and grunt to run tasks automatically, compass and sass to build the stylesheets and bower to install client side libraries, on the other hand the backend team needs composer, php (with some exensions) and an Oracle database instance to test and code the APIs.
@@ -39,7 +39,7 @@ The build server needs to have installed Php, Composer, Node.js, NPM , Grunt, Bo
 
 **Every single change to our toolchain forces us to update the build server (ie: uninstall Php55 and install Php56) or maybe to set up a new one.**
 
-To avoid that annoying problem we decided to rethink the internal CI infrastructure adopting [Docker](http://docker.com). Docker is a platform that enables a lightweight virtualization through [Linux Containers](https://linuxcontainers.org); it allows you to spin up a new virtualized invironment in few seconds.
+To avoid that annoying problem we decided to rethink the internal CI infrastructure adopting [Docker](http://docker.com). Docker is a platform that enables a lightweight virtualization through [Linux Containers](https://linuxcontainers.org); it allows you to spin up a new virtualized environment in few seconds.
 
 As a backend dev I need to test an API against Oracle database; this is very simple, I just need to run:<br>
 `docker run -d -p 49160:22 -p 49161:1521 wnameless/oracle-xe-11g` and I have a new fresh database instance.
@@ -62,7 +62,7 @@ Jenkins is responsible to execute the following steps:
 * Compose the product package (**)
 * Update the staging environment with the new code (**)
 
-** if the Build was successful
+** if the build succeed
 
 As you can see the only think a developer should care about is to implement a new feature and push-it.<br>
 The whole **Build** -> **Test** -> **Deploy-To-Stage** process is automated.
@@ -73,7 +73,7 @@ There are 2 main usage modes for jenkins; you can install a single instance and 
 
 IMHO both the single instance and the master-slave solution have some limitations.
 <br>
-The first one forces you to install all you need inside the machine, so if you have projects with different requirements (for examample PHP54  and PHP55) you have to choose just one version.
+The first one forces you to install all you need inside the machine, so if you have projects with different requirements (for instance PHP54  and PHP55) you have to choose just one version.
 The latter allows you to build and test packages with different environments but it may be hard to maintain.<br>
 If you have a 10 slaves infrastructure every time a new PHP version is released you have to install the new package within a bounch of machines.
 
@@ -85,7 +85,7 @@ FROM php:5.6 # Previously php:5.5
 ```
 
 ## Jenkins + Docker
-Our first target has been to keep the developer job unchanged then to maintain the current **Code** -> **Commit** -> **Push** workflow.<br>
+Our first target has been to keep the developer job unchanged to maintain the current **Code** -> **Commit** -> **Push** workflow without caring about the build process<br>
 Jenkins is a powerful Continuous Integration platform, we are using it from a very long time but the growing complexity of the projects forced us to manage an handful of VMs with a dozen of dependencies (such as ruby, nodejs, php, sass, etc..). It's very hard to maintain.
 
 Anyway, we are confortable with that tool so we decided to redraw the game under the hood. We kept a master instance which should be responsible to monitor the build process running inside a throwaway containter.
